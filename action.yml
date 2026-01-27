@@ -21,6 +21,9 @@ inputs:
     default: false
   vmUrl:
     description: "A Url that points to the VM to install. It has to be a zip file."
+  vmStatus:
+    description: "The vm flavour to download (ex: in pharo-vm-Darwin-arm64-stable.zip, status is 'stable')"
+    default: stable
   skipImageDownload:
     description: "If true, the action will not download any Pharo image"
     default: false
@@ -47,11 +50,10 @@ runs:
 
     - name: Install Pharo VM
       run: |
-        VM_STATUS="stable"
         if [ -n "${{ inputs.vmUrl }}" ]; then
           URL="${{ inputs.vmUrl }}"
         else
-          URL="${{ env.FILES_URL }}/pharo-vm-${{ env.HOST_OS }}-${{ env.HOST_ARCH }}-${VM_STATUS}.zip"
+          URL="${{ env.FILES_URL }}/pharo-vm-${{ env.HOST_OS }}-${{ env.HOST_ARCH }}-${{ inputs.vmStatus }}.zip"
         fi
         mkdir -p $(dirname ${{ steps.vars.outputs.VM_DIR }})
         echo "Downloading $URL to ${{ steps.vars.outputs.VM_DIR }}"

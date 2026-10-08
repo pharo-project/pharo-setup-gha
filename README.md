@@ -29,8 +29,8 @@ To install and use a Pharo 13 image,
           $PHARO --headless Pharo.image eval 'SystemVersion current printString'
 ```
 
-This action supports Windows runners and you can take advantage of it to define jobs that will run on many OS. In this case, you will need to use bash and tell the plugin that you want to use Pharo from bash.
-In the followin example, you will test on ubuntu, mac Os and Windows 3 different Pharo versions: 11, 12 and 13.
+This action supports Windows runners and you can use it to define jobs that will run on many OS. In this case, you will need to use bash and tell the action that you want to use Pharo from bash.
+In the following example, you will test on Ubuntu, macOS and Windows 3 different Pharo versions: 11, 12 and 13.
 ```yaml
 jobs:
   build:
@@ -64,6 +64,16 @@ You can also specify the directory where the VM or the image will be stored:
 ```
 
 It is also possible to set the image name with the `imageName` parameter.
+
+The `version` parameter is required.
+
+### Additional parameters
+
+| Parameter           | Description                                                                                              | Default                   |
+| ------------------- | -------------------------------------------------------------------------------------------------------- | ------------------------- |
+| `vmUrl`             | A URL pointing to a custom VM zip to install instead of the automatic one.                               | *(empty — auto-download)* |
+| `vmStatus`          | The VM flavour to download (e.g. in `pharo-vm-Darwin-arm64-stable.zip`, the status is `stable`).         | `stable`                  |
+| `skipImageDownload` | If `true`, the action will not download any Pharo image.                                                 | `false`                   |
 
 ## Legal
 Uses MIT license. 
